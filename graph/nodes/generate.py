@@ -8,7 +8,10 @@ from graph.state import GraphState
 def generate(state: GraphState) -> Dict[str, Any]:
     print("---GENERATE---")
     question = state["question"]
-    documents = state["documents"]
+    if "documents" in state: # if the route to web search in first time then give error
+        documents = state["documents"]
+    else:
+        documents = None
 
     generation = generation_chain.invoke({"context": documents, "question": question})
     return {"documents": documents, "question": question, "generation": generation}
