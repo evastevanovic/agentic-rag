@@ -23,6 +23,8 @@ system = """You are a grader assessing whether an answer addresses / resolves a 
      Give a binary score 'yes' or 'no'. Yes' means that the answer resolves the question."""
 
 
+# the issue is that it's coming from web search. there will be no documents from web search.
+
 hallucination_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),

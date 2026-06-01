@@ -34,25 +34,34 @@ def grade_generation_grounded_in_documents_and_question(state: GraphState) -> st
     documents = state["documents"]
     generation = state["generation"]
 
-    score = hallucination_grader.invoke(
-        {"documents": documents, "generation": generation}
-    )
+    # bypass issue: if no documents just put score as yes
+    # not a hallucination if there are no relevant docs, the ai just provides the answer
 
+    no_docs = 0
 
-    if hallucination_grade := score.binary_score:
-        print("---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---")
-        print("---GRADE GENERATION vs QUESTION---")
-        score = answer_grader.invoke({"question": question, "generation": generation})
-        if answer_grade := score.binary_score:
-            print("---DECISION: GENERATION ADDRESSES QUESTION---")
-            return "useful"
+    if documents:
+        score = hallucination_grader.invoke(
+            {"documents": documents, "generation": generation}
+        )
+        if hallucination_grade := score.binary_score:
+            print("---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---")
         else:
-            print("---DECISION: GENERATION DOES NOT ADDRESS QUESTION---")
-            return "not useful"
-        
+            print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---")
+            return "not supported"
+
     else:
-        print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---")
-        return "not supported"
+        no_docs = 1
+
+
+    print("---GRADE GENERATION vs QUESTION---")
+    score = answer_grader.invoke({"question": question, "generation": generation})
+    if (score.binary_score) or (no_docs): 
+        print("---DECISION: GENERATION ADDRESSES QUESTION---")
+        return "useful"
+    else:
+        print("---DECISION: GENERATION DOES NOT ADDRESS QUESTION---")
+        return "not useful"
+        
     
 
 
