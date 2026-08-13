@@ -56,9 +56,10 @@ Setup virtual environment:
 poetry install
 ```
 
-Pull the Llama 3.1 model:
+Pull the following models:
 
 ```
+ollama pull qwen3-embedding:0.6b
 ollama pull llama3.1
 ```
 
