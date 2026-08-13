@@ -56,6 +56,12 @@ Setup virtual environment:
 poetry install
 ```
 
+Pull the Llama 3.1 model:
+
+```
+ollama pull llama3.1
+```
+
 Configure Environment Variables -
 Create a .env file in the project root:
 
