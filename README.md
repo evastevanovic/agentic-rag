@@ -60,7 +60,7 @@ Configure Environment Variables -
 Create a .env file in the project root:
 
 ```bash
-TAVILY_API_KEY=your_langsmith_api_key
+TAVILY_API_KEY=your_tavily_api_key
 PYTHONPATH=your_python_path
 
 # Optional: LangSmith Tracing
