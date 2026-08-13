@@ -28,12 +28,12 @@ embeddings = OllamaEmbeddings(
     model="qwen3-embedding:0.6b"
 )
 
-# vectorstore = Chroma.from_documents(
-#     documents = doc_splits,
-#     collection_name = "rag-chroma",
-#     embedding = embeddings,
-#     persist_directory = "./.chroma"
-# )
+vectorstore = Chroma.from_documents(
+    documents = doc_splits,
+    collection_name = "rag-chroma",
+    embedding = embeddings,
+    persist_directory = "./.chroma"
+)
 
 retriever = Chroma(
     collection_name = "rag-chroma",
