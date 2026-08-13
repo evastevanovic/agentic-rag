@@ -47,13 +47,13 @@ The repository includes a `pytest` test suite to validate core components. This 
 To get started with this project, clone the repository and navigate into the project directory:
 
 ```bash
-git clone (https://github.com/evastevanovic/agentic-rag.git)
+git clone https://github.com/evastevanovic/agentic-rag.git
 cd agentic-rag
 ```
 
 Setup virtual environment:
 ```bash
-uv sync
+poetry install
 ```
 
 Configure Environment Variables -
@@ -72,11 +72,11 @@ LANGCHAIN_API_KEY=your_langsmith_api_key
 1. Ingest Documentation - 
    Run the ingestion script to scrape web articles, process the text, and save the embeddings into your local Chroma vector database:
     ```bash
-    uv run python ingestion.py
+    poetry run python ingestion.py
    ```
    
 2. Run the Advanced RAG Application - 
    Execute the main application to run a sample query against your compiled LangGraph workflow:
     ```bash
-    uv run python main.py
+    poetry run python main.py
     ```
