@@ -56,6 +56,18 @@ Setup virtual environment:
 uv sync
 ```
 
+Configure Environment Variables -
+Create a .env file in the project root:
+
+```bash
+TAVILY_API_KEY=your_langsmith_api_key
+PYTHONPATH=your_python_path
+
+# Optional: LangSmith Tracing
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_api_key
+```
+
 # Usage
 1. Ingest Documentation - 
    Run the ingestion script to scrape web articles, process the text, and save the embeddings into your local Chroma vector database:
